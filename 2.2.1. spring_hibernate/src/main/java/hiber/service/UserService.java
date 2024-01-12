@@ -1,10 +1,6 @@
 package hiber.service;
 
-
-
 import hiber.model.*;
-
-
 import java.util.List;
 
 public interface UserService {
@@ -16,5 +12,5 @@ public interface UserService {
 
     List<Car> listCars();
 
-    User find(String model, int series);
+    User find(String carModel, int carSeries);
 }

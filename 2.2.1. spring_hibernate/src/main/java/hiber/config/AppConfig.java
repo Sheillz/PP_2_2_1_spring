@@ -1,6 +1,5 @@
 package hiber.config;
 
-
 import hiber.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,10 +11,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 import javax.sql.DataSource;
 import java.util.Properties;
-
 
 @Configuration
 @PropertySource("classpath:db.properties")
@@ -23,8 +20,11 @@ import java.util.Properties;
 @ComponentScan(value = "hiber")
 public class AppConfig {
 
+   private final Environment env;
    @Autowired
-   private Environment env;
+   public AppConfig(Environment env) {
+      this.env = env;
+   }
 
    @Bean
    public DataSource getDataSource() {

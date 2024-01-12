@@ -11,8 +11,6 @@ import java.util.List;
 
 @Repository
 public class UserDaoImp implements UserDao {
-
-
    private final SessionFactory sessionFactory;
    @Autowired
    public UserDaoImp(SessionFactory sessionFactory) {
@@ -43,15 +41,14 @@ public class UserDaoImp implements UserDao {
    }
 
    @Override
-   public User find(String model, int series) {
+   public User find(String carModel, int carSeries) {
       TypedQuery<Car> findCarQuery = sessionFactory.getCurrentSession().createQuery
-                      ("from Car where model = :model and series = :series")
-              .setParameter("model", model)
-              .setParameter("series", series);
+                      ("from Car where carModel = :car_model and carSeries = :car_series")
+              .setParameter("car_model", carModel)
+              .setParameter("car_series", carSeries);
       List<Car> carList = findCarQuery.getResultList();
       if (!carList.isEmpty()) {
          Car car = carList.get(0);
-         List<User>listUser = listUsers();
          return listUsers().stream()
                  .filter(user -> user.getCar().equals(car))
                  .findAny()
